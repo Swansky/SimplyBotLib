@@ -1,0 +1,4 @@
+rootProject.name = 'SimplyBotLib'
+
+gradle.ext.jdaVersion = "5.0.0"
+
