@@ -34,20 +34,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
         env:
-          PUB_GITHUB_TOKEN: ${{ secrets.PUB_GITHUB_TOKEN }}
+          PUB_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build with Gradle
         run: ./gradlew build
         env:
-          PUB_GITHUB_TOKEN: ${{ secrets.PUB_GITHUB_TOKEN }}
+          PUB_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run unit tests
         run: ./gradlew test
         env:
-          PUB_GITHUB_TOKEN: ${{ secrets.PUB_GITHUB_TOKEN }}
+          PUB_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish artifact to GitHub Packages
         if: github.ref == 'refs/heads/main'
         run: ./gradlew publish
         env:
-          PUB_GITHUB_TOKEN: ${{ secrets.PUB_GITHUB_TOKEN }}
+          PUB_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

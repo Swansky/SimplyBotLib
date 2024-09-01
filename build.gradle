@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'maven-publish'
 }
 
@@ -33,17 +32,44 @@ test {
     useJUnitPlatform()
 }
 
-shadowJar {
-    archiveBaseName.set(rootProject.name)
-    archiveClassifier.set('')
-
-}
-
 publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/swansky/SimplyBotLib")
+            credentials {
+                username = project.findProperty("github.name") ?: System.getenv("GITHUB_ACTOR")
+                password = project.findProperty("github.token") ?: System.getenv("PUB_GITHUB_TOKEN")
+            }
+        }
+    }
     publications {
-        shadow(MavenPublication) {
-            //from components.java
-            artifact shadowJar
+        mavenPublish(MavenPublication) {
+            from(components.java)
+
+            pom {
+                name = 'Simply Bot Lib'
+                description = 'A library to help to develop discord bot'
+                url = 'https://github.com/Swansky/SimplyBotLib'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'Swansky'
+                        name = 'Swansky'
+                        email = 'pro@swansky.fr'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/Swansky/SimplyBotLib.git'
+                    developerConnection = 'scm:git:ssh://github.com/Swansky/SimplyBotLib.git'
+                    url = 'https://github.com/swansky/SimplyBotLib'
+                }
+            }
         }
     }
 }
