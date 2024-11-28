@@ -45,4 +45,7 @@ public abstract class Bot {
 
     protected abstract void config(JDABuilder builder);
 
+    public JDA getJda() {
+        return jda;
+    }
 }

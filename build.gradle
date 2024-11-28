@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'fr.swansky'
-version = '1.0.0'
+version = '1.0.1'
 
 repositories {
     mavenCentral()
@@ -15,6 +15,7 @@ repositories {
             password = project.findProperty("github.token") ?: System.getenv("PUB_GITHUB_TOKEN")
         }
     }
+    mavenLocal()
 }
 
 dependencies {
