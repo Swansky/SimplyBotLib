@@ -6,7 +6,7 @@
 
 - 🟢 **Bot Initialization and Management**: SimpleBotLib enables quick and easy setup of your Discord bot, including token management and initial command handling.
 - 🟢 **JSON File Management**: Handles the configuration and persistence of your bot's settings using JSON files.
-- 🔴 **Intelligent Wrapper for Modals and Buttons** *(Coming Soon)*: A simplified way for managing Discord modals and buttons.
+- 🟠 **Intelligent Wrapper for Modals and Buttons** *(Coming Soon)*: A simplified way for managing Discord modals and buttons.
 - 🔴 **Default Commands** *(Coming Soon)*: A set of predefined commands to accelerate bot development.
 
 SimpleBotLib uses the [SSCS (Simple Slash Command System)](https://github.com/swansky/SSCS) library by default, which provides simplified slash command management.
@@ -18,7 +18,7 @@ SimpleBotLib uses the [SSCS (Simple Slash Command System)](https://github.com/sw
 You can add SimpleBotLib to your Gradle project using the following dependency:
 
 ```gradle
-implementation 'fr.swansky:SimplyBotLib:1.0.0'
+implementation 'fr.swansky:SimplyBotLib:1.0.2'
 ```
 
 ### Using a Specific Version of SSCS
