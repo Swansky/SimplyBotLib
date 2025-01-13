@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.SelfUser;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.GenericComponentInteractionCreateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
@@ -24,7 +25,6 @@ public class ActionRowListener extends ListenerAdapter {
 
     @Override
     public void onGenericComponentInteractionCreate(GenericComponentInteractionCreateEvent event) {
-
         Member member = event.getMessage().getMember();
         if (member == null) return;
         User user = member.getUser();
@@ -38,6 +38,24 @@ public class ActionRowListener extends ListenerAdapter {
             logger.warn("No action row found for {}", event.getComponentId());
         }
     }
+
+
+    @Override
+    public void onModalInteraction(ModalInteractionEvent event) {
+        Member member = event.getMessage().getMember();
+        if (member == null) return;
+        User user = member.getUser();
+
+        if (isNotValidUser(user)) {
+            return;
+        }
+        event.deferReply().queue();
+        if (!actionRowManager.handle(event)) {
+            event.getMessage().reply("No action found for this modal").queue();
+            logger.warn("No action row found for this modal {}", event.getModalId());
+        }
+    }
+
 
     private boolean isNotValidUser(User user) {
         SelfUser selfUser = jda.getSelfUser();
